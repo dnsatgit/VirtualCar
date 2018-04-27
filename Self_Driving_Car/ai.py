@@ -59,7 +59,7 @@ class Dqn():#deepQ learning model
     
     #select function: use of softmax function 
     def select_action(self, state):#distribution of probabnility for 3 q values
-        probs = F.softmax(self.model(Variable(state, volatile = True))*100)#volatile to save memory; 100: temp parameter
+        probs = F.softmax(self.model(Variable(state, volatile = True))*80)#volatile to save memory; 100: temp parameter
         action = probs.multinomial()#random draw: from distribution of probs
         return action.data[0,0]# return indeces of action
     
