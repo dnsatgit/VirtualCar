@@ -22,6 +22,8 @@ from ai import Dqn
 # Adding this line if we don't want the right click to put a red point
 Config.set('input', 'mouse', 'mouse,multitouch_on_demand')
 
+Config.set('graphics', 'width', '1200')
+Config.set('graphics', 'height', '800')
 # starting coordinates for createing barriers
 last_x = 0
 last_y = 0
