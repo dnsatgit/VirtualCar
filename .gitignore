@@ -97,3 +97,4 @@ ENV/
 
 # mypy
 .mypy_cache/
+Self_Driving_Car/last_brain.pth
