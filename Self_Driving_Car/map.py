@@ -194,7 +194,7 @@ class Game(Widget):
             self.car.velocity = Vector(6, 0).rotate(self.car.angle)
             last_reward = -0.2
             if distance < last_distance:
-                last_reward = 0.1
+                last_reward = 0.01
 
 #if car is edges of map!!!!
         if self.car.x < 10:
