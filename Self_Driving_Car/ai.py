@@ -19,8 +19,8 @@ class Network(nn.Module):#netowrk inherits from Module
         super(Network, self).__init__()#to use nn.Module's inheritance
         self.input_size = input_size#no. of input neorons
         self.nb_action=nb_action#
-        self.fc1 = nn.Linear(input_size, 50)#30 hidden layer:full connection between ionput and hiddern
-        self.fc2 = nn.Linear(50, nb_action)#full connection between hidden and input layer
+        self.fc1 = nn.Linear(input_size, 300)#30 hidden layer:full connection between ionput and hiddern
+        self.fc2 = nn.Linear(300, nb_action)#full connection between hidden and input layer
      
     #forward: to activate the neurons rectifier activation fucntion
     def forward(self, state):
