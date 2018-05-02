@@ -15,18 +15,37 @@ from torch.autograd import Variable
 class Network(nn.Module):#netowrk inherits from Module
 #init: initialize everytime: 
 # hiddenlayers, output layers defined    
-    def __init__(self, input_size, nb_action):#3 arguments: self-object type, no. of input neron: 5 vectors of encoded values, output neurons
-        super(Network, self).__init__()#to use nn.Module's inheritance
-        self.input_size = input_size#no. of input neorons
-        self.nb_action=nb_action#
-        self.fc1 = nn.Linear(input_size, 300)#30 hidden layer:full connection between ionput and hiddern
-        self.fc2 = nn.Linear(300, nb_action)#full connection between hidden and input layer
+ 
+    def __init__(self, input_size, nb_action):
+        super(Network, self).__init__()
+        self.input_size = input_size
+        self.nb_action = nb_action
+        self.fc1 = nn.Linear(input_size, 50)
+        self.fc2 = nn.Linear(50, 25)
+        self.fc3 = nn.Linear(25, 10)
+        self.fcOut = nn.Linear(10, nb_action)
+    #original code before change of architecture to add additinal neuron to update spynamces
+   # def __init__(self, input_size, nb_action):#3 arguments: self-object type, no. of input neron: 5 vectors of encoded values, output neurons
+   #     super(Network, self).__init__()#to use nn.Module's inheritance
+   #     self.input_size = input_size#no. of input neorons
+   #     self.nb_action=nb_action#
+   #     self.fc1 = nn.Linear(input_size, 300)#30 hidden layer:full connection between ionput and hiddern
+   #     self.fc2 = nn.Linear(300, nb_action)#full connection between hidden and input layer
      
-    #forward: to activate the neurons rectifier activation fucntion
     def forward(self, state):
-        x = F.relu(self.fc1(state))#relu : activation function
-        q_values = self.fc2(x)#q values for output neurons
-        return q_values# every forward function will  return q values 
+        l1 = F.relu(self.fc1(state))
+        l2 = F.relu(self.fc2(l1))
+        l3 = F.sigmoid(self.fc3(l2))
+        q_values = self.fcOut(l3)
+        return q_values
+   
+   
+    #original code before change of architecture to add additinal neuron to update spynamces
+    #forward: to activate the neurons rectifier activation fucntion
+ #   def forward(self, state):
+ #       x = F.relu(self.fc1(state))#relu : activation function
+ #       q_values = self.fc2(x)#q values for output neurons
+ #       return q_values# every forward function will  return q values 
 
 #to implement experience replay: to consider past states 
 class ReplayMemory(object):
