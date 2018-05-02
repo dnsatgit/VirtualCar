@@ -1,7 +1,7 @@
 #@Objective: To create a map
 #imports of central libraries for support for environment
 import matplotlib.pyplot as plt
-import time
+import timeit
 import numpy as np
 from random import random, randint
 
@@ -17,6 +17,7 @@ from kivy.clock import Clock
 
 #used ai.py : Deep Q Learning- Dqn class from AI 
 from ai import Dqn
+
 
 
 # Adding this line if we don't want the right click to put a red point
@@ -38,6 +39,7 @@ action2rotation = [0,20,-20]
 
 #iet reward
 last_reward = 0
+#last_time=0
 
 #initialize scores vector to store rewards assignments
 scores = []
@@ -183,6 +185,9 @@ class Game(Widget):
         self.ball1.pos = self.car.sensor1
         self.ball2.pos = self.car.sensor2
         self.ball3.pos = self.car.sensor3
+#time
+        startTime=timeit.defult_time()
+
 
 #if car is onto the divider , slow down the car
         if divider[int(self.car.x),int(self.car.y)] > 0:
@@ -213,6 +218,19 @@ class Game(Widget):
         if distance < 100:#update coordinates of class
             goal_x = self.width-goal_x
             goal_y = self.height-goal_y
+            
+            
+        duration=timeit.default_time()-startTime
+        if duration>7 and duration<15:
+            last_reward-=-0.3
+        elif duration>15 and duration<25:
+            last_reward-=.6
+        elif duration>25:
+            last_reward-=.9
+        
+        duration=0
+        startTime = timeit.default_timer()
+            
         last_distance = distance
 
 # Adding the painting tools
